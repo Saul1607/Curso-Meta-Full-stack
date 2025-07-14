@@ -1,0 +1,6 @@
+total 2
+drwxr-xr-x 1 carlo 197609   0 jul. 10 23:34 archive/
+-rw-r--r-- 1 carlo 197609 192 jul. 10 23:41 input.txt
+-rw-r--r-- 1 carlo 197609   0 jul. 10 23:43 output.txt
+drwxr-xr-x 1 carlo 197609   0 jul. 10 23:34 projects/
+-rwxr-xr-x 1 carlo 197609  32 jul. 10 21:58 testshell.sh*
