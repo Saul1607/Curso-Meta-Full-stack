@@ -6,10 +6,12 @@ import Sidebar from "./components/Sidebar"
 
 function App() {
   return (
-    <div>
-      <Header name="Anna" color="purple"/>
-      <Main greet="Howdy"/>
-      <Sidebar greet="Hi"/>
+    <div className="App">
+      <Header />
+      <div>
+      <Main userName="Mack" num={5} />
+      <Sidebar />
+      </div>
     </div>
     )
 }

@@ -1,8 +1,13 @@
 import React from "react";
 
 function Header(props) {
-    console.log(props)
-    return <h1>Hello there indeed, {props.name}, {props.color} </h1>
+    const headerStyle = {
+        background: "lightblue",
+        maxWidth: "100%",
+    }
+    return (
+        <h1 style={headerStyle}>Header content here</h1>
+    )
 }
 
 export default Header;
