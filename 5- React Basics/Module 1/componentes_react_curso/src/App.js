@@ -1,17 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
-import Header from "./components/Header"
-import Main from "./components/Main"
-import Sidebar from "./components/Sidebar"
+import avatar from "./avatar.png";
+
+function Logo(props) {
+  const userPic = <img src={avatar} />
+  return userPic;
+}
+
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <div>
-      <Main userName="Mack" num={5} />
-      <Sidebar />
-      </div>
+    <div>
+      <h1>Hello World!</h1>
+      <Logo />
     </div>
     )
 }
