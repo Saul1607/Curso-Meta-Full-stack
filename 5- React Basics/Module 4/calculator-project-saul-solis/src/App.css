@@ -1,0 +1,101 @@
+* {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+.App {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 2rem 2rem 10rem 2rem;
+  margin: 0 15rem 0 15rem;
+  background-color: rgb(110, 110, 110);
+  border: 0.3rem solid black;
+  border-radius: 10rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
+.form-container p {
+  color: rgb(255, 246, 246);
+  font-size: 5rem;
+}
+
+.form-container input {
+  border: 0.2rem solid black;
+  font-size: 2rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  box-shadow: none;
+}
+
+.button-operators {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  font-size: 2rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  gap: 1rem;
+}
+
+.button-operators button {
+  background-color: whitesmoke;
+  width: 6rem;
+  height: 6rem;
+  border: none;
+  border-radius: 1rem;
+}
+
+.button-operators button:hover {
+  transform: scale(1.1, 1.1);
+  transition: transform 0.5s;
+  background-color: lightblue;
+  border: 0.1rem solid blue;
+}
+
+.button-reset {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.button-reset button{
+  width: 6rem;
+  height: 6rem;
+  background-color: coral;
+  border: none;
+  border-radius: 1rem;
+}
+
+.button-reset button:hover {
+  transform: scale(1.1, 1.1);
+  transition: transform 0.5s;
+  background-color: white;
+  border: 0.1rem solid black;
+}
+
+@media (max-width: 980px) {
+  * {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
+
+  .App {
+    margin: 0;
+    padding: 1rem;
+    border-radius: none;
+    border: none;
+  }
+}
