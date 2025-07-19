@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 
 const topDesserts = [
@@ -45,7 +46,34 @@ const DessertList = (props) => {
   return <ul>{lowCaloriesDesserts}</ul>;
 }
 
+const ToDo = props => (
+  <tr>
+    <td>
+      <label>{props.id}</label>
+    </td>
+    <td>
+      <input />
+    </td>
+    <td>
+      <label>{props.createdAt}</label>
+    </td>
+  </tr>
+)
+
 function App() {
+  const [todos, setTodos] = useState([{
+    id: 'todo1',
+    createdAt: '18:00',
+  },
+  {
+    id: 'todo2',
+    createdAt: '20:30',
+  }]);
+
+  const reverseOrder = () => {
+    setTodos([...todos].reverse());
+  }
+
   const listItems = topDesserts.map(dessert => {
     const itemText = `${dessert.title} - ${dessert.price}`
     return <li>{itemText}</li>
@@ -53,11 +81,23 @@ function App() {
 
   return (
     <div>
-      <ul>
-        {listItems}
-      </ul>
-      <h1>List of low calorie desserts:</h1>
-      <DessertList topDesserts={topDesserts} />
+      <div>
+        <ul>
+         {listItems}
+        </ul>
+        <h1>List of low calorie desserts:</h1>
+        <DessertList topDesserts={topDesserts} />
+      </div>
+      <div>
+        <button onClick={reverseOrder}>Reverse</button>
+        <table>
+          <tbody>
+            {todos.map((todo, index) => (
+              <ToDo key={todo.id} id={todo.id} createdAt={todo.createdAt} />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
