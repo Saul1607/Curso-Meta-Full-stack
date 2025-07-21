@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const GoalForm = (props) => {
   const [formData, setFormData] = useState({goal: "", by: ""});
@@ -41,6 +41,7 @@ const ListOfGoals = (props) => {
 function App() {
   const [restaurantName, setRestaurantName] = useState("Lemon");
   const [allGoals, updateAllGoals] = useState([]);
+  const [toggle, setToggle] = useState(false);
 
   const addGoal = (goal) => {updateAllGoals([...allGoals, goal]);}
 
@@ -48,14 +49,31 @@ function App() {
     setRestaurantName("Little Lemon");
   };
 
+  const clickHandler = () => {
+    setToggle(!toggle);
+  }
+
+  useEffect(() => {
+    document.title = toggle ? "Welcome to Little Lemon" : "Using the use effect hook"
+  }, [toggle]);
+
   return (
     <div className='App'>
-      <h1>{restaurantName}</h1>
-      <button onClick={updateRestaurantName}>
-        Update restaurant name
-      </button>
-      <GoalForm onAdd={addGoal} />
-      <ListOfGoals allGoals={allGoals} />
+      <div>
+        <h1>{restaurantName}</h1>
+        <button onClick={updateRestaurantName}>
+          Update restaurant name
+        </button>
+        <GoalForm onAdd={addGoal} />
+        <ListOfGoals allGoals={allGoals} />
+      </div>
+      <div>
+        <h1>Ussing the useEffect hook</h1>
+        <button onClick={clickHandler}>
+          Toggle message
+        </button>
+        {toggle && <h2>Welcome to Little Lemon</h2>}
+      </div>
     </div>
   );
 };
