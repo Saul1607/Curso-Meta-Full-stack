@@ -40,3 +40,7 @@ button {
   border: 0.1rem solid black;
   color: whitesmoke;
 }
+
+.Row {
+  display: flex;
+}
