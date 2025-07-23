@@ -53,7 +53,39 @@ const PointMouseLogger = ({ mousePosition }) => {
 };
 
 const PanelMouseTracker = withMousePosition(PanelMouseLogger);
-const PointMouseTracker = withMousePosition(PointMouseLogger)
+const PointMouseTracker = withMousePosition(PointMouseLogger);
+
+const DataFetcher = ({ render, url }) => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (url.includes("desserts")) {
+      setData(["cake", "ice cream", "pie", "brownie"]);
+    } else {
+      setData(["water", "soda", "juice"]);
+    }
+  }, []);
+
+  return render(data);
+};
+
+const DessertsCount = () => {
+  return (
+    <DataFetcher
+      url="https://littlelemon/desserts"
+      render={(data) => <p>{data.length} desserts</p>}
+    />
+  );
+};
+
+const DrinksCount = () => {
+  return (
+    <DataFetcher
+      url="https://littlelemon/drinks"
+      render={(data) => <p>{data.length} drinks</p>}
+    />
+  )
+}
 
 function App() {
   return (
@@ -61,6 +93,8 @@ function App() {
       <header className='Header'>Little Lemon Restaurant 🍕</header>
       <PanelMouseTracker />
       <PointMouseTracker />
+      <DessertsCount />
+      <DrinksCount />
     </div>
   );
 }
