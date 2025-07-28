@@ -7,7 +7,7 @@ import {
   faMedium,
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, HStack} from "@chakra-ui/react";
 
 const socials = [
   {
@@ -39,7 +39,11 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const headerElement = prevScrollY.current;
 
+      if (!headerElement) {
+        return;
+      }
       if (currentScrollY > prevScrollY.current) {
         setShowHeader(false);
       } else {
@@ -86,16 +90,18 @@ const Header = () => {
           alignItems="center"
         >
           <nav>
-            {socials.map((social, index) => (
-              <a
-                href={social.url}
-                key={index}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <FontAwesomeIcon icon={social.icon} size="2x" />
-              </a>
+            <HStack spacing={8}>
+              {socials.map(({icon, url}) => (
+                <a
+                  href={url}
+                  key={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FontAwesomeIcon icon={icon} size="2x" />
+                </a>
             ))}
+            </HStack>
           </nav>
           <nav>
             <HStack spacing={8}>

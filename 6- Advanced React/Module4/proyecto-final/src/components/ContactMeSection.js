@@ -19,7 +19,7 @@ import {useAlertContext} from "../context/alertContext";
 
 const LandingSection = () => {
   const { isLoading, response, submit } = useSubmit();
-  const { onOpen, onClose } = useAlertContext();
+  const { onOpen } = useAlertContext();
 
   const formik = useFormik({
     initialValues: {
@@ -28,28 +28,26 @@ const LandingSection = () => {
       type: "hireMe",
       comment: "",
     },
-    onSubmit: (values) => { submit("/fake-api",values) },
+    onSubmit: (values) => { 
+      submit("https://example.com/contactme",values) },
     validationSchema: Yup.object({
       firstName: Yup.string().required("Required"),
       email: Yup.string().email("Invalid email").required("Required"),
       type: Yup.string().required(),
-      comment: Yup.string(),
+      comment: Yup.string()
+        .min(25, "Must be 25 characters at minimum")
+        .required("Required")
     }),
   });
 
   useEffect(() => {
-    if (response?.type === "success") {
-      onOpen("success", response.message)
-      formik.resetForm();
-    } else if (response?.type === "error"){
-      onOpen("error", response.message)
-    } else if (response?.type) {
-      const timeout = setTimeout(() => {
-        onClose();
-      }, 3000);
-      return () => clearTimeout(timeout);
+    if (response) {
+      onOpen(response.type, response.message)
+      if (response.type === "success") {
+        formik.resetForm();
+      }
     }
-  }, [response, onOpen, formik, onClose]);
+  }, [response]);
 
   return (
     <FullScreenSection
@@ -65,24 +63,24 @@ const LandingSection = () => {
         <Box p={6} rounded="md" w="100%">
           <form onSubmit={formik.handleSubmit}>
             <VStack spacing={4}>
-              <FormControl isInvalid={formik.touched.firstName && formik.errors.firstName}>
+              <FormControl isInvalid={formik.touched.firstName && !!formik.errors.firstName}>
                 <FormLabel htmlFor="firstName">Name</FormLabel>
                 <Input
-                  {...formik.getFieldProps("firstName")}
                   id="firstName"
                   name="firstName"
+                  {...formik.getFieldProps("firstName")}
                   value={formik.values.firstName}
                   onChange={formik.handleChange}
                 />
                   <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={formik.touched.email && formik.errors.email}>
+              <FormControl isInvalid={formik.touched.email && !!formik.errors.email}>
                 <FormLabel htmlFor="email">Email Address</FormLabel>
                 <Input
-                  {...formik.getFieldProps("email")}
                   id="email"
                   name="email"
                   type="email"
+                  {...formik.getFieldProps("email")}
                   value={formik.values.email}
                   onChange={formik.handleChange}
                 />
@@ -91,9 +89,9 @@ const LandingSection = () => {
               <FormControl>
                 <FormLabel htmlFor="type">Type of enquiry</FormLabel>
                 <Select
-                  {...formik.getFieldProps("type")}
                   id="type"
                   name="type"
+                  {...formik.getFieldProps("type")}
                   value={formik.values.type}
                   onChange={formik.handleChange}
                   backgroundColor="white"
@@ -106,13 +104,13 @@ const LandingSection = () => {
                   <option value="other">Other</option>
                 </Select>
               </FormControl>
-              <FormControl isInvalid={formik.touched.comment && formik.errors.comment}>
+              <FormControl isInvalid={formik.touched.comment && !!formik.errors.comment}>
                 <FormLabel htmlFor="comment">Your message</FormLabel>
                 <Textarea
-                  {...formik.getFieldProps("comment")}
                   id="comment"
                   name="comment"
                   height={250}
+                  {...formik.getFieldProps("comment")}
                   value={formik.values.comment}
                   onChange={formik.handleChange}
                 />
