@@ -1,22 +1,27 @@
+import { useRef, type FormEvent } from "react"
+
 const App = () => {
 
-  const products = [
-    { title: "🍉", id: 1 },
-    { title: "🍎", id: 2 },
-    { title: "🍐", id: 3 },
-  ];
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    console.log("Me procesaste...");
+    console.log(inputRef.current?.value)
+  }
 
   return (
     <div>
-      <h1>Listas</h1>
-      <ul>
-        {
-          products.map((product) => (
-            <li key={product.id}>{product.title}</li>
-          ))
-        }
-      </ul>
+      <h1>Formulario</h1>
+      <form onSubmit={handleSubmit}>
+        <input 
+        type="text" 
+        ref={inputRef} 
+        name="username" 
+      />
+      <button type="submit">Enviar</button>
+      </form>
     </div>
-  )
-}
+  );
+};
 export default App
