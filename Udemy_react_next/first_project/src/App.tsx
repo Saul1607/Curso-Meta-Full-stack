@@ -1,27 +1,19 @@
-import { useRef, type FormEvent } from "react"
+import { useState } from "react"
 
 const App = () => {
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log("Me procesaste...");
-    console.log(inputRef.current?.value)
-  }
+  const [username, setUsername] = useState("");
 
   return (
     <div>
-      <h1>Formulario</h1>
-      <form onSubmit={handleSubmit}>
-        <input 
+      <h1>Formulario controlado</h1>
+      <input 
         type="text" 
-        ref={inputRef} 
-        name="username" 
+        value={username} 
+        onChange={e => setUsername(e.target.value)}
       />
-      <button type="submit">Enviar</button>
-      </form>
+      <h2>{username}</h2>
     </div>
   );
 };
-export default App
+export default App;
