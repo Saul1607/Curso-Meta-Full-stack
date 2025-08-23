@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import type { Pokemon } from "../types/pokemon.interface";
 import { pokemonService } from "../services/pokemon.service";
 
@@ -7,7 +7,7 @@ export const useGameManager = () => {
     const [isLoading, setIsLoading] = useState<boolean | null>(null);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchRandomPokemon = async () => {
+    const loadNewPokemon = useCallback(async () => {
         setIsLoading(true);
         setError(null);
         try {
@@ -18,15 +18,16 @@ export const useGameManager = () => {
         } finally {
             setIsLoading(false);
         }
-    };
-
+    }, []);
+    
     useEffect(() => {
-        fetchRandomPokemon();
-    }, [])
+        loadNewPokemon();
+    }, [loadNewPokemon])
 
     return {
         pokemon,
         isLoading,
         error,
+        loadNewPokemon,
     };
 };

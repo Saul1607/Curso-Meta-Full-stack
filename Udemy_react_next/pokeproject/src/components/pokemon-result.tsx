@@ -1,4 +1,8 @@
-const PokemonResult = () => {
+interface Props {
+  loadNewPokemon: () => void;
+}
+
+const PokemonResult = ({loadNewPokemon}: Props) => {
 
   const result = "correct";
 
@@ -11,7 +15,12 @@ const PokemonResult = () => {
       ) : (
         <h2>¡Incorrecto! <i className="bi bi-emoji-angry-fill"></i></h2>
       )}
-      <button className="btn btn-dark mt-3">Volver a jugar</button>
+      <button 
+        className="btn btn-dark mt-3"
+        onClick={loadNewPokemon}
+      >
+        Volver a jugar
+      </button>
     </div>
   );
 };
