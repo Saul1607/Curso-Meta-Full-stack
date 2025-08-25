@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { GameState } from "../hooks/use-game-manager";
 
-const PokemonForm = () => {
+interface Props {
+  handlePokemonNameSubmit: (userInput: string) => void;
+  gameState: GameState
+}
+
+const PokemonForm = ({handlePokemonNameSubmit, gameState}: Props) => {
 
   const [inputValue, setInputValue] = useState("");
 
@@ -10,8 +16,8 @@ const PokemonForm = () => {
       console.log("Input is empty");
       return;
     }
-
-    console.log(`Searching for Pokémon: ${inputValue}`);
+    handlePokemonNameSubmit(inputValue.trim().toLowerCase());
+    setInputValue("");
   };
 
   return (
@@ -26,12 +32,13 @@ const PokemonForm = () => {
         aria-label="¿Quién es este Pokémon?"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        autoFocus
+        autoFocus 
+        disabled={gameState !== "playing"}
       />
       <button 
         className="btn btn-outline-dark" 
         type="submit"
-        disabled={!inputValue.trim()}
+        disabled={!inputValue.trim() || gameState !== "playing"}
       >
         Adivinar
       </button>

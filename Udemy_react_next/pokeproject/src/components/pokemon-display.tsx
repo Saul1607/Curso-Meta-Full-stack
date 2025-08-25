@@ -1,14 +1,16 @@
 import type { Pokemon } from "../types/pokemon.interface";
 import Spinner from "./Spinner"
+import { GameState } from "../hooks/use-game-manager";
 
 interface Props {
   pokemon: Pokemon | null;
   isLoading: boolean;
+  gameState: GameState;
 };
 
-const PokemonDisplay = ({ pokemon, isLoading }: Props) => {
+const PokemonDisplay = ({ pokemon, isLoading, gameState}: Props) => {
 
-  const showAnswer = false;
+  const showAnswer = gameState !== GameState.Playing;
   const image = pokemon?.image;
   const name = pokemon?.name;
 
