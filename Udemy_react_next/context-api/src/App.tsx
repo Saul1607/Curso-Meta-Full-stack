@@ -1,9 +1,12 @@
-import { useAuth } from "./hooks/useAuth"
 import LoginButton from "./components/login-button";
+import LogoutButton from "./components/logout-button";
+import { useAuth } from "./hooks/use-auth";
 
 const App = () => {
 
-  const { user } = useAuth()
+  //const { user } = useAuth()
+
+  const { user } = useAuth();
 
   if(!user) {
     return (
@@ -18,6 +21,7 @@ const App = () => {
     <div className="container">
       <h1>Welcome, {user.name}!</h1>
       <p>Your email is: {user.email}</p>
+      <LogoutButton />
     </div>
   );
 };
